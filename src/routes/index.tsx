@@ -5,7 +5,6 @@ import { Home } from "../screens";
 import { Platform, TouchableOpacity, Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Constants from "expo-constants";
-import colors from "../../assets/colors";
 import { normalize } from "../utility";
 
 const navigationOptionsBuilder = (
@@ -30,7 +29,7 @@ const navigationOptionsBuilder = (
     : {
         headerForceInset: { top: "never", bottom: 30 },
       }),
-  headerTintColor: colors.fifthColor,
+  headerTintColor: "black",
   headerTitleStyle: {
     fontWeight: "bold",
     fontSize: Platform.OS === "ios" ? undefined : normalize(25),
@@ -48,7 +47,7 @@ const navigationOptionsBuilder = (
       <Feather
         name="chevron-left"
         size={Platform.OS === "ios" ? 24 : 40}
-        color={colors.fifthColor}
+        color={"green"}
       />
     </TouchableOpacity>
   ),
@@ -65,9 +64,7 @@ export const AppStack = createStackNavigator(
         {
           title: "Pokédex",
         },
-        {
-          headerLeft: null,
-        }
+        { headerLeft: null }
       ),
     },
   },

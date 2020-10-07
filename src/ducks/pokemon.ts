@@ -1,4 +1,4 @@
-import { hen, Hen } from "../utility";
+import { hen, Hen, capitalizeFirstLetter, removeWhiteSpaces } from "../utility";
 import { createSelector } from "reselect";
 import { RootState } from "./state";
 import { ThunkAction } from "redux-thunk";
@@ -32,6 +32,14 @@ export type Ability = {
   slot: number;
 };
 
+export type Type = {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+};
+
 export type Pokemon = {
   id: number;
   name: string;
@@ -39,6 +47,7 @@ export type Pokemon = {
   stats: Array<Stat>;
   abilities: Array<Ability>;
   img: string;
+  types: Array<Type>;
 };
 
 export interface InitialState {
@@ -60,7 +69,6 @@ export const getPokemonList = createSelector(pokemonSelector, (state) => {
       return state.pokemonByID[id];
     }
   );
-  console.log("POKEMON ARRAY", pokemonArray);
   return {
     pokemon: pokemonArray,
   };
@@ -90,11 +98,12 @@ export function listPokemon(): ThunkAction<Promise<void>, RootState, any, any> {
           return axios.get(poke.url).then((r) => {
             const newPoke: Pokemon = {
               id: r.data.id,
-              name: r.data.name,
+              name: capitalizeFirstLetter(r.data.name),
               url: poke.url,
               stats: r.data.stats,
               abilities: r.data.abilities,
               img: r.data.sprites.other["official-artwork"]["front_default"],
+              types: r.data.types,
             };
             dispatch(actions.loadPokemonByID(newPoke));
           });
