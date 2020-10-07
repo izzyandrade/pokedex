@@ -1,0 +1,15 @@
+export default {
+  primaryColor: "#21FF9F",
+  secondColor: "#14E2FF",
+  thirdColor: "#008893",
+  fourthColor: "#F7F8FA",
+  fifthColor: "#265558",
+  sixthColor: "#E2E2E2",
+  seventhColor: "#646464",
+  eighthColor: "#8E89D0",
+  ninethColor: "#008893",
+  tenthColor: "#00ACBA",
+  eleventhColor: "#F45",
+  stPatricksBlue: "#2A2A72",
+  fuzzyWuzzy: "#C97064",
+};
