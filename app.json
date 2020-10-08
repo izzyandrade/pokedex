@@ -1,18 +1,15 @@
 {
   "expo": {
-    "name": "pokedex-wiser",
-    "slug": "pokedex-wiser",
+    "name": "Pokédex",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
+    "slug": "pokedex",
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.izzy.pokedex",
+      "buildNumber": "1.0.0"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "package": "com.izzy.pokedex",
+      "versionCode": 1
     }
   }
 }

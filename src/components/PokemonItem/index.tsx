@@ -1,12 +1,16 @@
 import React from "react";
 import { Pokemon } from "../../ducks/pokemon";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { typeColors, typeBubbleColors } from "../../../assets/colors";
 import { capitalizeFirstLetter } from "../../utility";
+import PokeballSvg from "../Svg/Pokeball";
+import Pattern from "../Svg/Pattern";
+import { NavigationScreenProp } from "react-navigation";
 
 type PokemonItemProps = {
   pokemon: Pokemon;
+  navigation: NavigationScreenProp<any, any>;
 };
 
 interface TypeProps {
@@ -16,26 +20,54 @@ interface TypeProps {
 const PokemonItem = (props: PokemonItemProps) => {
   const { pokemon } = props;
   return (
-    <PokemonBox key={pokemon.id} type={pokemon.types[0].type.name}>
+    <PokemonBox
+      key={pokemon.id}
+      type={pokemon.types[0].type.name}
+      onPress={() => props.navigation.navigate("Pokemon", { id: pokemon.id })}
+    >
       <TextBox>
         <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
           #{pokemon.id}
         </Text>
         <Title>{pokemon.name}</Title>
-        <View style={{ display: "flex", flexDirection: "row" }}>
-          {pokemon.types.map((type) => {
+        <TypeContainer>
+          {pokemon.types.map((type, index) => {
             return (
-              <TypeBox type={type.type.name}>
-                <Text style={{ color: "white" }}>
+              <TypeBox type={type.type.name} key={index}>
+                <Text style={{ color: "white", fontWeight: "bold" }}>
                   {capitalizeFirstLetter(type.type.name)}
                 </Text>
               </TypeBox>
             );
           })}
-        </View>
+        </TypeContainer>
       </TextBox>
+      <Pattern
+        style={{
+          position: "absolute",
+          top: 10,
+          left: 80,
+          right: 0,
+          bottom: 0,
+        }}
+      />
+      <PokeballSvg
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 235,
+          right: 0,
+          bottom: 0,
+        }}
+      />
       <Image
-        style={{ width: 130, height: 130 }}
+        style={{
+          position: "absolute",
+          width: 150,
+          height: 150,
+          bottom: 0,
+          left: 170,
+        }}
         source={{
           uri: pokemon.img,
         }}
@@ -46,7 +78,7 @@ const PokemonItem = (props: PokemonItemProps) => {
 
 export default PokemonItem;
 
-const PokemonBox = styled.View<TypeProps>`
+const PokemonBox = styled.TouchableOpacity<TypeProps>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -57,6 +89,11 @@ const PokemonBox = styled.View<TypeProps>`
   height: 130px;
   border-radius: 15px;
   elevation: 3;
+`;
+
+const TypeContainer = styled.View`
+  display: flex;
+  flex-direction: row;
 `;
 
 const TypeBox = styled.View<TypeProps>`

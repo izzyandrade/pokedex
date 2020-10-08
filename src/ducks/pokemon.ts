@@ -1,4 +1,4 @@
-import { hen, Hen, capitalizeFirstLetter, removeWhiteSpaces } from "../utility";
+import { hen, Hen, capitalizeFirstLetter } from "../utility";
 import { createSelector } from "reselect";
 import { RootState } from "./state";
 import { ThunkAction } from "redux-thunk";
@@ -73,6 +73,14 @@ export const getPokemonList = createSelector(pokemonSelector, (state) => {
     pokemon: pokemonArray,
   };
 });
+
+export const getPokemonByID = (s: RootState, props: any) =>
+  createSelector(pokemonSelector, (state) => {
+    const id = props.navigation.getParam("id");
+    return {
+      pokemon: state.pokemonByID[id],
+    };
+  });
 
 class PokemonSection extends Hen<InitialState> {
   loadPokemonList(p: PokemonList) {
