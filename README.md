@@ -20,15 +20,14 @@ Then, inside the project folder on your terminal, run:
 yarn install
 ```
 
-or
-
 this will install all of the required dependencies of the project. After that, just run
 
 ```
 yarn start
 ```
 
-and play with it in your local device!
+And play with it in your local device! If you are running on Android Studio or iOS Simulator, there is no need to install anything else.
+But if you are running in a physical device, please install expo application, so you can scan the QR Code generated.
 
 ## Considerations
 
