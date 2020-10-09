@@ -1,6 +1,6 @@
 import React from "react";
 import { Pokemon } from "../../ducks/pokemon";
-import { Image, Text, TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import { typeColors, typeBubbleColors } from "../../../assets/colors";
 import { capitalizeFirstLetter } from "../../utility";
@@ -42,6 +42,18 @@ const PokemonItem = (props: PokemonItemProps) => {
           })}
         </TypeContainer>
       </TextBox>
+      <View style={{ justifyContent: "center" }}>
+        <Image
+          style={{
+            width: 150,
+            height: 150,
+          }}
+          resizeMode={"contain"}
+          source={{
+            uri: pokemon.img,
+          }}
+        />
+      </View>
       <Pattern
         style={{
           position: "absolute",
@@ -49,27 +61,6 @@ const PokemonItem = (props: PokemonItemProps) => {
           left: 80,
           right: 0,
           bottom: 0,
-        }}
-      />
-      <PokeballSvg
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 235,
-          right: 0,
-          bottom: 0,
-        }}
-      />
-      <Image
-        style={{
-          position: "absolute",
-          width: 150,
-          height: 150,
-          bottom: 0,
-          left: 170,
-        }}
-        source={{
-          uri: pokemon.img,
         }}
       />
     </PokemonBox>

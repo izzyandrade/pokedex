@@ -52,12 +52,14 @@ export type Pokemon = {
 
 export interface InitialState {
   pokemonList: PokemonList;
+  loadingList: boolean;
   pokemonByID: { [id: number]: Pokemon };
 }
 
 let initialState: InitialState = {
   pokemonList: {} as PokemonList,
   pokemonByID: {},
+  loadingList: false,
 };
 
 //Selectors
@@ -71,6 +73,7 @@ export const getPokemonList = createSelector(pokemonSelector, (state) => {
   );
   return {
     pokemon: pokemonArray,
+    loadingList: state.loadingList,
   };
 });
 
@@ -83,6 +86,10 @@ export const getPokemonByID = (s: RootState, props: any) =>
   });
 
 class PokemonSection extends Hen<InitialState> {
+  setListLoading(l: boolean) {
+    this.state.loadingList = l;
+  }
+
   loadPokemonList(p: PokemonList) {
     this.state.pokemonList = p;
   }

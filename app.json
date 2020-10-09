@@ -10,6 +10,7 @@
     "android": {
       "package": "com.izzy.pokedex",
       "versionCode": 1
-    }
+    },
+    "orientation": "portrait"
   }
 }

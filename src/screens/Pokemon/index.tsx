@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { getPokemonByID, Pokemon } from "../../ducks/pokemon";
 import { NavigationScreenProp } from "react-navigation";
@@ -76,8 +76,63 @@ const PokemonScreen = (props: PokemonProps) => {
         </View>
 
         <StatsContainer
-          style={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-        ></StatsContainer>
+          style={{
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+          }}
+        >
+          <StatsBox>
+            <StatsTitle type={pokemon.types[0].type.name}>
+              Pokédex Data
+            </StatsTitle>
+            {pokemon.stats.map((stat) => {
+              if (
+                stat.stat.name === "special-attack" ||
+                stat.stat.name === "special-defense"
+              ) {
+                return null;
+              } else {
+                return (
+                  <Text key={stat.stat.name} style={{ paddingVertical: 5 }}>
+                    <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+                      {stat.stat.name.toUpperCase()}
+                    </Text>
+                    {"    "} - {"    "}
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        color: "grey",
+                      }}
+                    >
+                      {stat.base_stat}
+                    </Text>
+                  </Text>
+                );
+              }
+            })}
+          </StatsBox>
+          <StatsBox>
+            <StatsTitle type={pokemon.types[0].type.name}>Abilities</StatsTitle>
+            {pokemon.abilities.map((ab, index) => {
+              return (
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "bold",
+                    color: "grey",
+                    paddingVertical: 5,
+                  }}
+                  key={index}
+                >
+                  {index + 1}.
+                  {" " +
+                    capitalizeFirstLetter(ab.ability.name.replace("-", " "))}
+                </Text>
+              );
+            })}
+          </StatsBox>
+        </StatsContainer>
       </View>
     </>
   );
@@ -99,6 +154,14 @@ const PokemonContainer = styled.View<TypeProps>`
 const StatsContainer = styled.View`
   height: 100%;
   background-color: #e5e5e5;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+
+const StatsBox = styled.View`
+  flex: 1;
 `;
 
 const TypeContainer = styled.View`
@@ -129,4 +192,10 @@ const Title = styled.Text`
   font-weight: bold;
   font-size: 32px;
   padding-vertical: 10px;
+`;
+
+const StatsTitle = styled.Text<TypeProps>`
+  color: ${(props) => typeBubbleColors[props.type]};
+  font-size: 25px;
+  font-weight: bold;
 `;
