@@ -45,4 +45,6 @@ this is erasing all data stored in redux everytime the app runs!
 
 Hope you all enjoy it, I am sure enjoying making this project!
 
+API: https://pokeapi.co/
+
 Cheers!
